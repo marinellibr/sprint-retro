@@ -75,7 +75,7 @@
   function showTrackToast(track) {
     window.clearTimeout(trackToastTimer);
     trackToast.classList.remove("is-visible");
-    trackToast.textContent = track.title;
+    trackToast.textContent = `${track.title} • ${track.artist}`;
     trackToast.setAttribute("aria-label", `Tocando agora: ${track.title}, ${track.artist}`);
     void trackToast.offsetWidth;
     trackToast.classList.add("is-visible");
