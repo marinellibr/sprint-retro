@@ -16,6 +16,8 @@
   const volumeControl = document.getElementById("volume-control");
   const audioStatus = document.getElementById("audio-status");
   const audioStatusText = document.getElementById("audio-status-text");
+  const trackToast = document.getElementById("track-toast");
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
   let currentScene = 0;
   let currentStep = 0;
@@ -26,11 +28,13 @@
   let soundtrackHasStarted = false;
   let soundtrackStartPending = false;
   let soundtrackRequestId = 0;
+  let trackToastTimer = 0;
+  let lastShownTrackSrc = "";
   const soundtrackTracks = [
-    { src: "./assets/bass-persuades.mp3", cue: 28 },
-    { src: "./assets/little-things-gypsy-woman.mp3", cue: 15 },
-    { src: "./assets/last-train-home.mp3", cue: 52 },
-    { src: "./assets/we-are-the-people.mp3", cue: 0 }
+    { src: "./assets/bass-persuades.mp3", cue: 28, title: "Bass Persuades", artist: "Miley Cyrus" },
+    { src: "./assets/little-things-gypsy-woman.mp3", cue: 15, title: "Little Things x Gypsy Woman", artist: "Jorja Smith" },
+    { src: "./assets/last-train-home.mp3", cue: 52, title: "Last Train Home", artist: "John Mayer" },
+    { src: "./assets/we-are-the-people.mp3", cue: 0, title: "We Are The People", artist: "Empire of the Sun" }
   ];
   const soundtrackPreloads = [];
 
@@ -66,6 +70,24 @@
     muteButton.setAttribute("aria-label", isMuted ? "Desmutar música" : "Mutar música");
     muteButton.classList.toggle("is-muted", isMuted);
     volumeControl.setAttribute("aria-valuetext", `${Math.round(soundtrack.volume * 100)} por cento`);
+  }
+
+  function showTrackToast(track) {
+    window.clearTimeout(trackToastTimer);
+    trackToast.classList.remove("is-visible");
+    trackToast.textContent = track.title;
+    trackToast.setAttribute("aria-label", `Tocando agora: ${track.title}, ${track.artist}`);
+    void trackToast.offsetWidth;
+    trackToast.classList.add("is-visible");
+    trackToastTimer = window.setTimeout(() => {
+      trackToast.classList.remove("is-visible");
+    }, 2800);
+  }
+
+  function updateBrowserTheme(scene) {
+    const color = scene.dataset.themeColor || "#121212";
+    themeColorMeta.setAttribute("content", color);
+    document.documentElement.style.setProperty("--scene-color", color);
   }
 
   function playFrom(time) {
@@ -143,6 +165,10 @@
       soundtrackHasStarted = false;
       soundtrackStartPending = false;
     }
+    if (lastShownTrackSrc !== track.src) {
+      lastShownTrackSrc = track.src;
+      showTrackToast(track);
+    }
     if (changedTrack || (!soundtrackHasStarted && !soundtrackStartPending)) playFrom(track.cue);
   }
 
@@ -206,6 +232,7 @@
   function showScene(index, options) {
     const settings = Object.assign({ revealAll: false, announce: true }, options);
     currentScene = Math.max(0, Math.min(index, totalScenes - 1));
+    updateBrowserTheme(scenes[currentScene]);
 
     scenes.forEach((scene, sceneIndex) => {
       const active = sceneIndex === currentScene;
@@ -345,7 +372,7 @@
 
   if ("serviceWorker" in navigator && /^https?:$/.test(window.location.protocol)) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js?v=2").catch(() => {});
+      navigator.serviceWorker.register("./sw.js?v=3").catch(() => {});
     });
   }
 })();

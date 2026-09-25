@@ -1,5 +1,6 @@
 /* 01. Variables */
 :root {
+  --scene-color: #7b2cff;
   --black: #121212;
   --true-black: #000000;
   --white: #ffffff;
@@ -25,7 +26,7 @@
 /* 02. Reset */
 *, *::before, *::after { box-sizing: border-box; }
 * { -webkit-tap-highlight-color: transparent; }
-html { color-scheme: dark; overflow-x: clip; }
+html { color-scheme: dark; overflow-x: clip; background: var(--scene-color); }
 body, h1, h2, p, ol { margin: 0; }
 button, input { font: inherit; }
 button { color: inherit; }
@@ -34,7 +35,7 @@ button { color: inherit; }
 /* 03. Typography */
 body {
   min-width: 20rem;
-  background: var(--black);
+  background: var(--scene-color);
   color: var(--white);
   font-family: Arial, Helvetica, "Helvetica Neue", sans-serif;
   font-size: 1rem;
@@ -156,6 +157,29 @@ body.js { overflow: hidden; }
   color: var(--white);
   filter: drop-shadow(0 1px 2px rgba(0,0,0,.5));
   pointer-events: auto;
+}
+
+.track-toast {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(.65rem);
+  color: currentColor;
+  font-size: clamp(.62rem, 2.3vw, .76rem);
+  font-weight: 900;
+  letter-spacing: .04em;
+  line-height: 1;
+  text-align: right;
+  text-shadow: 0 1px 3px rgba(0,0,0,.72);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: max-width 420ms var(--ease-out), opacity 260ms ease, transform 420ms var(--ease-out);
+}
+
+.track-toast.is-visible {
+  max-width: min(52vw, 19rem);
+  opacity: 1;
+  transform: none;
 }
 
 .mute-button {

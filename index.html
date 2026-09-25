@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#7b2cff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="Sprint Wrapped da squad Combinaqui — Release 3, Sprint 4.">
   <title>Sprint Wrapped</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237B2CFF'/%3E%3Ccircle cx='32' cy='32' r='21' fill='%23C7FF00'/%3E%3Cpath d='M20 24h25M20 32h21M20 40h16' stroke='%23121212' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -12,7 +13,7 @@
   <link rel="preload" href="./assets/little-things-gypsy-woman.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="./assets/last-train-home.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="./assets/we-are-the-people.mp3" as="audio" type="audio/mpeg">
-  <link rel="stylesheet" href="./styles.css?v=2">
+  <link rel="stylesheet" href="./styles.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#presentation">Pular para a apresentação</a>
@@ -20,6 +21,7 @@
   <header class="app-header" aria-label="Progresso da apresentação">
     <div class="story-progress" id="story-progress" aria-label="Progresso: cena 1 de 11"></div>
     <div class="audio-controls" aria-label="Controles da música">
+      <span class="track-toast" id="track-toast" role="status" aria-live="polite"></span>
       <button class="mute-button" id="mute-button" type="button" aria-label="Mutar música" aria-pressed="false">
         <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
           <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
@@ -40,7 +42,7 @@
   <div id="scene-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
   <main id="presentation" tabindex="-1">
-    <section class="scene scene-01 is-active" data-title="Sprint Wrapped" data-announcement="Squad Combinaqui. Release 3, Sprint 4. Sprint Wrapped. Seu resumo nada convencional da última sprint.">
+    <section class="scene scene-01 is-active" data-theme-color="#7b2cff" data-title="Sprint Wrapped" data-announcement="Squad Combinaqui. Release 3, Sprint 4. Sprint Wrapped. Seu resumo nada convencional da última sprint.">
       <div class="graphic graphic-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="scene-content opening-copy">
         <div class="opening-meta">
@@ -53,7 +55,7 @@
       </div>
     </section>
 
-    <section class="scene scene-02" data-title="Um ritmo diferente" data-announcement="Essa sprint teve um ritmo diferente. Menos cards. Mais preparação.">
+    <section class="scene scene-02" data-theme-color="#c7ff00" data-title="Um ritmo diferente" data-announcement="Essa sprint teve um ritmo diferente. Menos cards. Mais preparação.">
       <div class="graphic rhythm-disc" aria-hidden="true"></div>
       <div class="graphic rhythm-lines" aria-hidden="true"></div>
       <div class="scene-content">
@@ -63,7 +65,7 @@
       </div>
     </section>
 
-    <section class="scene scene-03" data-title="Duas grandes histórias" data-announcement="Duas grandes histórias definiram nossa sprint.">
+    <section class="scene scene-03" data-theme-color="#ff4fb3" data-title="Duas grandes histórias" data-announcement="Duas grandes histórias definiram nossa sprint.">
       <div class="graphic number-rings" aria-hidden="true"></div>
       <div class="scene-content number-layout">
         <p class="eyebrow">03 / 11 · DUAS FRENTES</p>
@@ -72,7 +74,7 @@
       </div>
     </section>
 
-    <section class="scene scene-04" data-title="Preparando a migração" data-announcement="Faixa 1. Preparando a migração. Não foi só refinar uma migração. Foi preparar o terreno.">
+    <section class="scene scene-04" data-theme-color="#335cff" data-title="Preparando a migração" data-announcement="Faixa 1. Preparando a migração. Não foi só refinar uma migração. Foi preparar o terreno.">
       <div class="album-art" aria-hidden="true"><span class="album-hole"></span><span class="album-line"></span></div>
       <div class="scene-content album-copy">
         <p class="track-label">FAIXA 01 <span>SIDE A</span></p>
@@ -81,7 +83,7 @@
       </div>
     </section>
 
-    <section class="scene scene-05" data-title="The Migration Mix" data-announcement="The Migration Mix. Redux, Caronte, CMS e iDS versão 3.">
+    <section class="scene scene-05" data-theme-color="#121212" data-title="The Migration Mix" data-announcement="The Migration Mix. Redux, Caronte, CMS e iDS versão 3.">
       <div class="graphic mix-bars" aria-hidden="true"></div>
       <div class="scene-content mix-layout">
         <div class="mix-heading">
@@ -97,7 +99,7 @@
       </div>
     </section>
 
-    <section class="scene scene-06" data-title="Under the hood" data-announcement="You didn't see it. But it matters. Parte importante dessa sprint aconteceu por baixo do capô.">
+    <section class="scene scene-06" data-theme-color="#ffe234" data-title="Under the hood" data-announcement="You didn't see it. But it matters. Parte importante dessa sprint aconteceu por baixo do capô.">
       <div class="graphic technical-grid" aria-hidden="true"></div>
       <div class="graphic technical-target" aria-hidden="true"></div>
       <div class="scene-content hood-layout">
@@ -108,7 +110,7 @@
       </div>
     </section>
 
-    <section class="scene scene-07" data-title="Teste A/B no Comprovante" data-announcement="Faixa 2. Teste A/B no Comprovante. Uma pequena mudança. Duas experiências.">
+    <section class="scene scene-07" data-theme-color="#7b2cff" data-title="Teste A/B no Comprovante" data-announcement="Faixa 2. Teste A/B no Comprovante. Uma pequena mudança. Duas experiências.">
       <div class="split-letters" aria-hidden="true"><span>A</span><span>B</span></div>
       <div class="scene-content ab-intro">
         <p class="track-label">FAIXA 02 <span>SIDE B</span></p>
@@ -117,7 +119,7 @@
       </div>
     </section>
 
-    <section class="scene scene-08" data-title="Decisão baseada em dados" data-announcement="A e B. Duas experiências. Uma decisão baseada em dados. A gente testa.">
+    <section class="scene scene-08" data-theme-color="#f4f1e8" data-title="Decisão baseada em dados" data-announcement="A e B. Duas experiências. Uma decisão baseada em dados. A gente testa.">
       <div class="ab-panels" aria-hidden="true"><span>A</span><span>B</span></div>
       <div class="scene-content experiment-copy">
         <p class="eyebrow">EXPERIMENTO · NÃO ACHISMO</p>
@@ -126,7 +128,7 @@
       </div>
     </section>
 
-    <section class="scene scene-09" data-title="Preparamos o futuro e testamos o presente" data-announcement="Nesta sprint fizemos duas coisas. Preparamos o futuro. Testamos o presente.">
+    <section class="scene scene-09" data-theme-color="#f4f1e8" data-title="Preparamos o futuro e testamos o presente" data-announcement="Nesta sprint fizemos duas coisas. Preparamos o futuro. Testamos o presente.">
       <div class="graphic synthesis-link" aria-hidden="true"><span></span></div>
       <div class="scene-content synthesis-layout">
         <p class="eyebrow">09 / 11 · A SÍNTESE</p>
@@ -136,7 +138,7 @@
       </div>
     </section>
 
-    <section class="scene scene-10" data-title="See you next sprint" data-announcement="That was your sprint. Migração preparada. Experimento no ar. Próximo capítulo carregando. See you next sprint.">
+    <section class="scene scene-10" data-theme-color="#4b14c8" data-title="See you next sprint" data-announcement="That was your sprint. Migração preparada. Experimento no ar. Próximo capítulo carregando. See you next sprint.">
       <div class="graphic finale-spiral" aria-hidden="true"></div>
       <div class="scene-content finale-layout">
         <p class="eyebrow">SPRINT // WRAPPED · OUTRO</p>
@@ -146,7 +148,7 @@
       </div>
     </section>
 
-    <section class="scene scene-11" data-title="Your Sprint Wrapped" data-announcement="Your Sprint Wrapped. Duas grandes frentes. Quatro pilares na preparação. Um experimento A/B. Preparamos o futuro. Testamos o presente. Músicas tocadas: Bass Persuades, Little Things x Gypsy Woman, Last Train Home e We Are The People.">
+    <section class="scene scene-11" data-theme-color="#c7ff00" data-title="Your Sprint Wrapped" data-announcement="Your Sprint Wrapped. Duas grandes frentes. Quatro pilares na preparação. Um experimento A/B. Preparamos o futuro. Testamos o presente. Músicas tocadas: Bass Persuades, Little Things x Gypsy Woman, Last Train Home e We Are The People.">
       <div class="summary-pattern" aria-hidden="true"></div>
       <div class="scene-content summary-layout">
         <div class="summary-title-block">
@@ -200,6 +202,6 @@
   </noscript>
 
   <audio id="soundtrack" preload="metadata" src="./assets/bass-persuades.mp3" aria-hidden="true" tabindex="-1"></audio>
-  <script src="./script.js?v=2"></script>
+  <script src="./script.js?v=3"></script>
 </body>
 </html>
