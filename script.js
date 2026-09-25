@@ -17,6 +17,7 @@
   const audioStatus = document.getElementById("audio-status");
   const audioStatusText = document.getElementById("audio-status-text");
   const trackToast = document.getElementById("track-toast");
+  const trackToastText = document.getElementById("track-toast-text");
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
   let currentScene = 0;
@@ -29,6 +30,8 @@
   let soundtrackStartPending = false;
   let soundtrackRequestId = 0;
   let trackToastTimer = 0;
+  let trackToastMeasureTimer = 0;
+  let trackToastFrame = 0;
   let lastShownTrackSrc = "";
   const soundtrackTracks = [
     { src: "./assets/bass-persuades.mp3", cue: 28, title: "Bass Persuades", artist: "Miley Cyrus" },
@@ -74,14 +77,31 @@
 
   function showTrackToast(track) {
     window.clearTimeout(trackToastTimer);
-    trackToast.classList.remove("is-visible");
-    trackToast.textContent = `${track.title} • ${track.artist}`;
+    window.clearTimeout(trackToastMeasureTimer);
+    window.cancelAnimationFrame(trackToastFrame);
+    trackToast.classList.remove("is-visible", "is-scrolling");
+    trackToastText.textContent = `${track.title} • ${track.artist}`;
     trackToast.setAttribute("aria-label", `Tocando agora: ${track.title}, ${track.artist}`);
     void trackToast.offsetWidth;
     trackToast.classList.add("is-visible");
-    trackToastTimer = window.setTimeout(() => {
-      trackToast.classList.remove("is-visible");
-    }, 2800);
+
+    trackToastFrame = window.requestAnimationFrame(() => {
+      trackToastMeasureTimer = window.setTimeout(() => {
+        const overflow = Math.max(0, trackToastText.scrollWidth - trackToast.clientWidth);
+        let visibleDuration = 2800;
+
+        if (overflow > 1) {
+          visibleDuration = Math.min(6500, Math.max(3200, overflow * 24));
+          trackToast.style.setProperty("--track-scroll-distance", `${-overflow}px`);
+          trackToast.style.setProperty("--track-scroll-duration", `${visibleDuration}ms`);
+          trackToast.classList.add("is-scrolling");
+        }
+
+        trackToastTimer = window.setTimeout(() => {
+          trackToast.classList.remove("is-visible", "is-scrolling");
+        }, visibleDuration + 180);
+      }, 460);
+    });
   }
 
   function updateBrowserTheme(scene) {

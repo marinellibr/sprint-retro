@@ -169,11 +169,19 @@ body.js { overflow: hidden; }
   font-weight: 900;
   letter-spacing: .04em;
   line-height: 1;
-  text-align: right;
+  text-align: left;
   text-shadow: 0 1px 3px rgba(0,0,0,.72);
   text-transform: uppercase;
   white-space: nowrap;
   transition: max-width 420ms var(--ease-out), opacity 260ms ease, transform 420ms var(--ease-out);
+}
+
+.track-toast-text { display: inline-block; min-width: max-content; }
+.track-toast.is-scrolling .track-toast-text { animation: track-toast-scroll var(--track-scroll-duration) linear forwards; }
+
+@keyframes track-toast-scroll {
+  0%, 20% { transform: translateX(0); }
+  80%, 100% { transform: translateX(var(--track-scroll-distance)); }
 }
 
 .track-toast.is-visible {
@@ -307,7 +315,7 @@ body.js { overflow: hidden; }
 .scene-02 { background: var(--acid-green); color: var(--black); }
 .scene-02 .scene-content { align-self: center; }
 .rhythm-title { font-size: clamp(3rem, 14.2vw, 10rem); }
-.statement { margin-top: clamp(1.4rem, 6vh, 4rem); color: var(--deep-purple); font-size: clamp(2.35rem, 6.8vw, 5.8rem); font-weight: 900; line-height: .88; letter-spacing: -.055em; }
+.statement { width: fit-content; margin-top: clamp(1.4rem, 6vh, 4rem); padding: .18em .22em .13em; background: var(--acid-green); color: var(--deep-purple); font-size: clamp(2.35rem, 6.8vw, 5.8rem); font-weight: 900; line-height: .88; letter-spacing: -.055em; }
 .rhythm-disc { width: clamp(15rem, 69vw, 38rem); aspect-ratio: 1; top: -18%; right: -24%; border: clamp(1.3rem, 6vw, 4rem) solid var(--purple); border-radius: 50%; opacity: .95; }
 .rhythm-lines { width: 55%; height: 34%; right: -8%; bottom: 12%; color: var(--purple); background: repeating-linear-gradient(45deg, currentColor 0 .28rem, transparent .28rem 1rem); transform: rotate(-7deg); opacity: .55; }
 
