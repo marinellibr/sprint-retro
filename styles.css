@@ -24,6 +24,7 @@
 
 /* 02. Reset */
 *, *::before, *::after { box-sizing: border-box; }
+* { -webkit-tap-highlight-color: transparent; }
 html { color-scheme: dark; overflow-x: clip; }
 body, h1, h2, p, ol { margin: 0; }
 button, input { font: inherit; }
@@ -259,11 +260,6 @@ body.js { overflow: hidden; }
   letter-spacing: .08em;
 }
 
-.tap-zones { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
-.tap-zone { position: absolute; top: 5rem; bottom: 5rem; width: 27%; border: 0; background: transparent; color: transparent; cursor: pointer; pointer-events: auto; }
-.tap-zone-previous { left: 0; }
-.tap-zone-next { right: 0; }
-
 /* 08. Graphics */
 .graphic, .album-art, .split-letters, .ab-panels, .summary-pattern { position: absolute; z-index: 0; pointer-events: none; }
 
@@ -366,7 +362,7 @@ body.js { overflow: hidden; }
 .finale-spiral { width: clamp(18rem, 90vw, 58rem); aspect-ratio: 1; right: -38%; bottom: -30%; border: clamp(1.1rem, 5vw, 4rem) solid var(--pink); border-radius: 50%; box-shadow: inset 0 0 0 clamp(1.1rem, 5vw, 4rem) var(--deep-purple), inset 0 0 0 clamp(2.2rem, 10vw, 8rem) var(--acid-green), inset 0 0 0 clamp(3.3rem, 15vw, 12rem) var(--deep-purple), inset 0 0 0 clamp(4.4rem, 20vw, 16rem) var(--pink); }
 
 /* 19. Scene 11 */
-.scene-11 { background: var(--acid-green); color: var(--black); }
+.scene-11 { overflow-y: auto; background: var(--acid-green); color: var(--black); }
 .summary-layout { display: grid; gap: 1.05rem; }
 .summary-title-block .hero-title { font-size: clamp(3.3rem, 15vw, 9.5rem); }
 .summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid currentColor; border-bottom: 3px solid currentColor; }
@@ -377,6 +373,15 @@ body.js { overflow: hidden; }
 .summary-stats span { margin-top: .55rem; font-size: clamp(.6rem, 2.4vw, .9rem); font-weight: 900; line-height: 1.05; }
 .summary-payoff { color: var(--deep-purple); font-size: clamp(1.5rem, 6.8vw, 4rem); font-weight: 900; line-height: .92; letter-spacing: -.04em; }
 .summary-list { max-width: 48ch; font-size: clamp(.8rem, 3vw, 1rem); font-weight: 800; }
+.music-credits { position: relative; z-index: 14; min-width: 0; }
+.music-credits h3 { margin: 0 0 .45rem; font-size: .68rem; letter-spacing: .12em; }
+.music-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
+.music-card { display: grid; min-width: 0; grid-template-columns: 2.6rem minmax(0, 1fr); gap: .5rem; align-items: center; padding: .35rem; border: 2px solid currentColor; background: rgba(255,255,255,.42); color: inherit; text-decoration: none; }
+.music-card img { display: block; width: 2.6rem; aspect-ratio: 1; object-fit: cover; }
+.music-card span, .music-card strong, .music-card small { display: block; min-width: 0; }
+.music-card strong { overflow: hidden; font-size: .72rem; line-height: 1.05; text-overflow: ellipsis; white-space: nowrap; }
+.music-card small { margin-top: .15rem; overflow: hidden; font-size: .62rem; text-overflow: ellipsis; white-space: nowrap; }
+.music-card:hover { background: var(--white); }
 .restart-button { position: relative; z-index: 14; min-height: 3.25rem; width: 100%; padding: .75rem 1rem; border: 3px solid var(--black); background: var(--black); color: var(--white); font-weight: 900; cursor: pointer; box-shadow: .35rem .35rem 0 var(--purple); }
 .summary-pattern { width: 65vw; height: 35vh; right: -25%; top: 7%; opacity: .24; background: repeating-linear-gradient(-45deg, var(--purple) 0 .6rem, transparent .6rem 1.5rem); transform: rotate(5deg); }
 
@@ -394,7 +399,11 @@ body.js { overflow: hidden; }
   .tracklist li { min-height: 5rem; }
   .summary-layout { grid-template-columns: 1.05fr .95fr; align-items: end; gap: 1.35rem 2rem; }
   .summary-title-block { grid-row: span 3; }
-  .summary-list, .restart-button { grid-column: 2; }
+  .summary-list, .music-credits, .restart-button { grid-column: 2; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .volume-control { display: none; }
 }
 
 /* 23. Desktop */
@@ -405,7 +414,6 @@ body.js { overflow: hidden; }
   .tap-hint { display: none; }
   .presentation-nav { right: 1.5rem; bottom: 1.25rem; left: auto; gap: 1rem; }
   .nav-button { width: 3.6rem; height: 3.6rem; }
-  .tap-zone { width: 22%; }
   .opening-copy { width: 86%; }
   .opening-copy .scene-copy { margin-left: 54%; }
   .rhythm-title { width: 75%; }

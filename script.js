@@ -10,8 +10,6 @@
   const sceneAnnouncer = document.getElementById("scene-announcer");
   const previousButton = document.getElementById("previous-button");
   const nextButton = document.getElementById("next-button");
-  const tapPrevious = document.getElementById("tap-previous");
-  const tapNext = document.getElementById("tap-next");
   const restartButton = document.getElementById("restart-button");
   const soundtrack = document.getElementById("soundtrack");
   const muteButton = document.getElementById("mute-button");
@@ -31,7 +29,8 @@
   const soundtrackTracks = [
     { src: "./assets/bass-persuades.mp3", cue: 28 },
     { src: "./assets/little-things-gypsy-woman.mp3", cue: 15 },
-    { src: "./assets/last-train-home.mp3", cue: 52 }
+    { src: "./assets/last-train-home.mp3", cue: 52 },
+    { src: "./assets/we-are-the-people.mp3", cue: 0 }
   ];
   const soundtrackPreloads = [];
 
@@ -130,7 +129,8 @@
   function getSoundtrackForCurrentScene() {
     if (currentScene < 3) return soundtrackTracks[0];
     if (currentScene < 6) return soundtrackTracks[1];
-    return soundtrackTracks[2];
+    if (currentScene < 8) return soundtrackTracks[2];
+    return soundtrackTracks[3];
   }
 
   function syncSoundtrackForCurrentScene() {
@@ -297,15 +297,22 @@
     if (pointerStartedOnControl) return;
     const deltaX = event.clientX - pointerStartX;
     const deltaY = event.clientY - pointerStartY;
-    if (Math.abs(deltaX) <= 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
-    if (deltaX < 0) next();
-    else previous();
+    const moved = Math.hypot(deltaX, deltaY);
+
+    if (moved > 12) {
+      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) next();
+        else previous();
+      }
+      return;
+    }
+
+    if (event.clientX <= window.innerWidth * 0.24) previous();
+    else next();
   }
 
   previousButton.addEventListener("click", previous);
   nextButton.addEventListener("click", next);
-  tapPrevious.addEventListener("click", previous);
-  tapNext.addEventListener("click", next);
   restartButton.addEventListener("click", restartPresentation);
   muteButton.addEventListener("click", () => {
     soundtrack.muted = !soundtrack.muted;
@@ -338,7 +345,7 @@
 
   if ("serviceWorker" in navigator && /^https?:$/.test(window.location.protocol)) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
+      navigator.serviceWorker.register("./sw.js?v=2").catch(() => {});
     });
   }
 })();

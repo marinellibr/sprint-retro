@@ -11,7 +11,8 @@
   <link rel="preload" href="./assets/bass-persuades.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="./assets/little-things-gypsy-woman.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="./assets/last-train-home.mp3" as="audio" type="audio/mpeg">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="preload" href="./assets/we-are-the-people.mp3" as="audio" type="audio/mpeg">
+  <link rel="stylesheet" href="./styles.css?v=2">
 </head>
 <body>
   <a class="skip-link" href="#presentation">Pular para a apresentação</a>
@@ -145,7 +146,7 @@
       </div>
     </section>
 
-    <section class="scene scene-11" data-title="Your Sprint Wrapped" data-announcement="Your Sprint Wrapped. Duas grandes frentes. Quatro pilares na preparação. Um experimento A/B. Preparamos o futuro. Testamos o presente.">
+    <section class="scene scene-11" data-title="Your Sprint Wrapped" data-announcement="Your Sprint Wrapped. Duas grandes frentes. Quatro pilares na preparação. Um experimento A/B. Preparamos o futuro. Testamos o presente. Músicas tocadas: Bass Persuades, Little Things x Gypsy Woman, Last Train Home e We Are The People.">
       <div class="summary-pattern" aria-hidden="true"></div>
       <div class="scene-content summary-layout">
         <div class="summary-title-block">
@@ -162,15 +163,31 @@
           <p>TESTAMOS O PRESENTE.</p>
         </div>
         <p class="summary-list">Redux · Caronte · CMS · iDS v3 · Teste A/B no Comprovante</p>
+        <section class="music-credits" aria-labelledby="music-credits-title">
+          <h3 id="music-credits-title">MÚSICAS DESTA SPRINT</h3>
+          <div class="music-grid">
+            <a class="music-card" href="https://open.spotify.com/intl-pt/track/2FZcjBYK4dTt48q94pJbJD?si=88d460544af34a17" target="_blank" rel="noopener noreferrer">
+              <img src="./assets/cover-bass-persuades.jpg" alt="Capa de Bass Persuades" width="300" height="300">
+              <span><strong>Bass Persuades</strong><small>Miley Cyrus</small></span>
+            </a>
+            <a class="music-card" href="https://open.spotify.com/intl-pt/track/2AlCe2DDxELeESF5IP3t9K?si=e71ada61babf4058" target="_blank" rel="noopener noreferrer">
+              <img src="./assets/cover-little-things.jpg" alt="Capa de Little Things x Gypsy Woman" width="300" height="300">
+              <span><strong>Little Things x Gypsy Woman</strong><small>Jorja Smith</small></span>
+            </a>
+            <a class="music-card" href="https://open.spotify.com/intl-pt/track/0tgBtQ0ISnMQOKorrN9HLX?si=04d57ec32d614479" target="_blank" rel="noopener noreferrer">
+              <img src="./assets/cover-last-train-home.jpg" alt="Capa de Last Train Home" width="300" height="300">
+              <span><strong>Last Train Home</strong><small>John Mayer</small></span>
+            </a>
+            <a class="music-card" href="https://open.spotify.com/intl-pt/track/3zEN0ii6s4DHHBpnTp3RP7?si=78dddc1b8ebe4bc3" target="_blank" rel="noopener noreferrer">
+              <img src="./assets/cover-we-are-the-people.jpg" alt="Capa de We Are The People" width="300" height="300">
+              <span><strong>We Are The People</strong><small>Empire of the Sun</small></span>
+            </a>
+          </div>
+        </section>
         <button class="restart-button" id="restart-button" type="button">REVER SPRINT WRAPPED <span aria-hidden="true">↺</span></button>
       </div>
     </section>
   </main>
-
-  <div class="tap-zones" aria-hidden="false">
-    <button id="tap-previous" class="tap-zone tap-zone-previous" type="button" aria-label="Voltar uma etapa"></button>
-    <button id="tap-next" class="tap-zone tap-zone-next" type="button" aria-label="Avançar uma etapa"></button>
-  </div>
 
   <nav class="presentation-nav" aria-label="Navegação entre cenas">
     <button id="previous-button" class="nav-button" type="button" aria-label="Voltar"><span aria-hidden="true">←</span></button>
@@ -183,6 +200,6 @@
   </noscript>
 
   <audio id="soundtrack" preload="metadata" src="./assets/bass-persuades.mp3" aria-hidden="true" tabindex="-1"></audio>
-  <script src="./script.js"></script>
+  <script src="./script.js?v=2"></script>
 </body>
 </html>

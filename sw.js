@@ -1,4 +1,4 @@
-const CACHE_NAME = "sprint-wrapped-v1";
+const CACHE_NAME = "sprint-wrapped-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -6,7 +6,12 @@ const CORE_ASSETS = [
   "./script.js",
   "./assets/bass-persuades.mp3",
   "./assets/little-things-gypsy-woman.mp3",
-  "./assets/last-train-home.mp3"
+  "./assets/last-train-home.mp3",
+  "./assets/we-are-the-people.mp3",
+  "./assets/cover-bass-persuades.jpg",
+  "./assets/cover-little-things.jpg",
+  "./assets/cover-last-train-home.jpg",
+  "./assets/cover-we-are-the-people.jpg"
 ];
 
 self.addEventListener("install", (event) => {
@@ -63,6 +68,21 @@ self.addEventListener("fetch", (event) => {
 
   if (request.headers.has("range")) {
     event.respondWith(rangeResponse(request));
+    return;
+  }
+
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html")))
+    );
     return;
   }
 
